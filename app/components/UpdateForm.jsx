@@ -2,18 +2,18 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 
-const InsertForm = () => {
+const UpdateForm = ({value}) => {
 
     const router = useRouter()
 
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [content, setContent] = useState("");
+    const [title, setTitle] = useState(value.title);
+    const [author, setAuthor] = useState(value.author);
+    const [content, setContent] = useState(value.content);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let data = await fetch("/api/post",{
-            method:"POST",
+        let data = await fetch(`/api/post/${value._id}`,{
+            method:"PUT",
             headers:{
                 "content-type":"application/json"
             },
@@ -22,7 +22,6 @@ const InsertForm = () => {
         data = await data.json();
         alert(data.msg)
         router.push("/")
-
     }
 
   return (
@@ -48,4 +47,4 @@ const InsertForm = () => {
   )
 }
 
-export default InsertForm
+export default UpdateForm

@@ -13,5 +13,3 @@ const PostSchema = new mongoose.Schema({
 module.exports = mongoose.models.Post || mongoose.model("Post",PostSchema)
 
 
-
-

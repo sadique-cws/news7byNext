@@ -3,7 +3,7 @@ import Sidebar from './components/Sidebar'
 import NewsCard from './components/NewsCard'
 
 const page = async () => {
-  let callingNews = await fetch("http://127.0.0.1:3000/api/post");
+  let callingNews = await fetch(process.env.DOMAIN + `post`,{cache:"no-store"});
   callingNews = await callingNews.json();
 
   return (
@@ -12,7 +12,7 @@ const page = async () => {
             <Sidebar/>
         </div>
         <div className='w-10/12 bg-sky-50 p-5 flex flex-col gap-2'>
-            {callingNews.data.map((value, key) => (<NewsCard value={value} key={key}/>))}
+            {callingNews.data.map((value, key) => (<NewsCard value={value} key={key} read={true}/>))}
         </div>
     </div>
   )
